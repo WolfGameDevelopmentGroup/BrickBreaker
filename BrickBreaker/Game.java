@@ -49,6 +49,7 @@ public class Game implements Runnable{
 
 	public void updateGame(){
 		this.frame++;
+		this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH);
 	}
 
 	public void renderizeGame(){

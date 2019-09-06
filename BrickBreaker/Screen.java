@@ -69,6 +69,7 @@ public class Screen extends Canvas{
 	}
 
 	private void drawBackground(){
+		this.g.setColor(this.bgColor);
 		this.g.fillRect(0,0,this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE);
 	}
 
@@ -78,11 +79,12 @@ public class Screen extends Canvas{
 	}
 	public void drawBall(Ball ball){
 		this.g.setColor(Color.white);
-		this.g.fillRect(ball.x,ball.y,ball.width, ball.height);
+		this.g.fillRect(ball.getBallXPosition(),ball.getBallYPosition(),ball.width, ball.height);
 	}
 
 
 	public void drawFrame(Player player, Ball ball){
+		this.g = this.layer.getGraphics();
 		this.drawBackground();
 		this.drawPlayer(player);
 		this.drawBall(ball);

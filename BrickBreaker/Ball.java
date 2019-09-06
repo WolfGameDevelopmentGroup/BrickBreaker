@@ -71,7 +71,6 @@ public class Ball extends BrickBreakerObject{
 		this.verifyBallColisionWithPlayer(boundsPlayer);
 		this.x += this.dx * this.speed;
 		this.y += this.dy * this.speed;
-
 	}
 
 	private void verifyBallColisionWithPlayer(Rectangle boundsPlayer){
