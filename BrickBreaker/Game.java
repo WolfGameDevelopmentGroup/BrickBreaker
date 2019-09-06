@@ -21,12 +21,15 @@ public class Game implements Runnable{
 	public boolean isRunning=false;
 	private int frame=0;
 
+	public int getActualFrameNumber(){
+		return this.frame;
+	}
+
 	public void updateGame(){
 		this.frame++;
 	}
 
 	public void renderizeGame(){
-		System.out.println(this.frame);
 	}
 
 	public synchronized void startGame(){
