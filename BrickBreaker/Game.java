@@ -18,6 +18,7 @@ package BrickBreaker;
 import BrickBreaker.Player;
 import BrickBreaker.Screen;
 import BrickBreaker.Ball;
+import java.awt.Color;
 
 public class Game implements Runnable{
 
@@ -39,8 +40,7 @@ public class Game implements Runnable{
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		this.player = new Player(20,20,this.SCREEN_WIDTH-10,this.SCREEN_HEIGHT/2);
 		this.ball = new Ball(10,10,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
-		this.screen.showScreen();
-		this.screen.canvas.requestFocus();
+		this.screen.setBackgroungColor(Color.BLACK);
 	}
 
 	public int getActualFrameNumber(){
@@ -52,6 +52,7 @@ public class Game implements Runnable{
 	}
 
 	public void renderizeGame(){
+		this.screen.drawFrame();
 	}
 
 	public synchronized void startGame(){

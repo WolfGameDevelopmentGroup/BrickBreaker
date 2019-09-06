@@ -21,6 +21,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Screen extends Canvas{
 
@@ -30,6 +32,10 @@ public class Screen extends Canvas{
 	private int WIDTH;
 	private int HEIGHT;
 	private int SCALE;
+	private BufferStrategy bs;
+	private BufferedImage layer;
+	private Color bgColor = Color.WHITE;
+	private Graphics g;
 
 	public Screen(String jframeTitle, int WIDTH, int HEIGHT, int SCALE){
 		this.WIDTH = WIDTH;
@@ -37,7 +43,7 @@ public class Screen extends Canvas{
 		this.SCALE = SCALE;
 
 		this.canvas = new Canvas();
-		this.canvas.setPreferredSize(new Dimension(this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE));		
+		this.canvas.setPreferredSize(new Dimension(this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE));	
 
 		this.jframeTitle = jframeTitle;
 		this.jframe = new JFrame(this.jframeTitle);
@@ -48,18 +54,34 @@ public class Screen extends Canvas{
 		this.jframe.pack();
 		this.jframe.setLocationRelativeTo(null);
 		this.jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+
+		this.canvas.createBufferStrategy(3);
+		this.bs = this.canvas.getBufferStrategy();
+		this.layer = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
+		this.g = this.layer.getGraphics();
+		this.g.setColor(this.bgColor);
+		this.showScreen();
+		this.canvas.requestFocus();
 	}
 
 	public void showScreen(){
 		this.jframe.setVisible(true);
 	}
 
-	public void drawBackground(Graphics g){
-		g.fillRect(0,0,this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE);
+	private void drawBackground(){
+		this.g.fillRect(0,0,this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE);
+		this.g = this.bs.getDrawGraphics();
+		this.g.drawImage(this.layer, 0, 0, this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,null);
 	}
 
-	public void drawScore(){
-		
+	public void drawFrame(){
+		this.drawBackground();
+		this.bs.show();
+	}
+
+	public void setBackgroungColor(Color bgColor){
+		this.bgColor = bgColor;
+		this.g.setColor(this.bgColor);
 	}
 
 
