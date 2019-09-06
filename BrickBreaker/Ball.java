@@ -18,6 +18,7 @@ package BrickBreaker;
 
 import java.util.Random;
 import java.awt.Rectangle;
+import java.util.*;
 
 public class Ball extends BrickBreakerObject{
 
@@ -65,10 +66,11 @@ public class Ball extends BrickBreakerObject{
 			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
 	}
 
-	public void update(Rectangle boundsPlayer, int SCREEN_WIDTH){
+	public void update(Rectangle boundsPlayer, int SCREEN_WIDTH, ArrayList<Bricks> brick){
 
 		this.verifyBallColisionWithWall(SCREEN_WIDTH);
 		this.verifyBallColisionWithPlayer(boundsPlayer);
+		this.verifyBallColisionWithBrick(brick);
 		this.x += this.dx * this.speed;
 		this.y += this.dy * this.speed;
 	}
@@ -97,6 +99,23 @@ public class Ball extends BrickBreakerObject{
 			this.giveBallRandomColisionAngle();
 			if(this.dy <= 0){
 				this.dy *= -1.0;
+			}
+		}
+
+	}
+
+	private void verifyBallColisionWithBrick(ArrayList<Bricks> brick){
+
+		int n = brick.size();
+		int i;
+
+		for(i=0;i<n;i++){
+			
+			if(this.bounds.intersects(brick.get(i).bounds)){
+				this.speed += 0.1;
+				this.giveBallRandomColisionAngle();
+				if(this.dy <= 0)		
+					this.dy *= -1;
 			}
 		}
 

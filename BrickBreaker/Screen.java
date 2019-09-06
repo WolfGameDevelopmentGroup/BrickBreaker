@@ -23,6 +23,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.*;
 
 public class Screen extends Canvas{
 
@@ -82,12 +83,16 @@ public class Screen extends Canvas{
 		this.g.fillRect(ball.getBallXPosition(),ball.getBallYPosition(),ball.width, ball.height);
 	}
 
-	public void drawBrick(Bricks brick){
+	public void drawBrick(ArrayList<Bricks> brick){
 		this.g.setColor(Color.white);
-		this.g.fillRect(brick.x,brick.y,brick.width, brick.height);
+		int n = brick.size();
+		int i;
+		for(i=0;i<n;i++){
+			this.g.fillRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height);
+		}
 	}
 
-	public void drawFrame(Player player, Ball ball, Bricks brick){
+	public void drawFrame(Player player, Ball ball, ArrayList<Bricks> brick){
 		this.g = this.layer.getGraphics();
 		this.drawBackground();
 		this.drawPlayer(player);

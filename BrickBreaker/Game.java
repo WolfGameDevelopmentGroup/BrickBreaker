@@ -22,6 +22,8 @@ import BrickBreaker.Bricks;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.*;
+import java.awt.Rectangle;
 
 public class Game implements Runnable, KeyListener{
 
@@ -34,7 +36,7 @@ public class Game implements Runnable, KeyListener{
 	private Screen screen;
 	private Player player;
 	private Ball ball;
-	private Bricks brick;
+	private ArrayList<Bricks> brick = new ArrayList<Bricks>();
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -44,9 +46,19 @@ public class Game implements Runnable, KeyListener{
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		this.player = new Player(20,5,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT-5);
 		this.ball = new Ball(5,5,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
-		this.brick = new Bricks(10,10,this.SCREEN_WIDTH/2,0);
+		this.buildBricks();
 		this.screen.setBackgroungColor(Color.BLACK);
 		this.screen.canvas.addKeyListener(this);
+	}
+
+	public void buildBricks(){
+		
+		int i;
+
+		for(i=0;i<10;i++){
+			this.brick.add(new Bricks(10,10,i*10,0));
+			this.brick.get(i).bounds = new Rectangle((int)(this.brick.get(i).x),(int)(this.brick.get(i).y),this.brick.get(i).width,this.brick.get(i).height);
+		}
 	}
 
 	public int getActualFrameNumber(){
@@ -55,7 +67,7 @@ public class Game implements Runnable, KeyListener{
 
 	public void updateGame(){
 		this.frame++;
-		this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH);
+		this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH,this.brick);
 		this.player.update();
 	}
 
