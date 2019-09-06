@@ -38,8 +38,8 @@ public class Game implements Runnable{
 		this.SCREEN_HEIGHT = HEIGHT;
 		this.SCALE = SCALE;
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
-		this.player = new Player(20,20,this.SCREEN_WIDTH-10,this.SCREEN_HEIGHT/2);
-		this.ball = new Ball(10,10,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
+		this.player = new Player(20,5,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT-5);
+		this.ball = new Ball(5,5,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
 		this.screen.setBackgroungColor(Color.BLACK);
 	}
 
@@ -52,7 +52,7 @@ public class Game implements Runnable{
 	}
 
 	public void renderizeGame(){
-		this.screen.drawFrame();
+		this.screen.drawFrame(this.player,this.ball);
 	}
 
 	public synchronized void startGame(){
