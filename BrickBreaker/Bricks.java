@@ -18,6 +18,8 @@ package BrickBreaker;
 
 public class Bricks extends BrickBreakerObject{
 
+	public boolean itWasRemoved = false;
+
 	public Bricks(int WIDTH, int HEIGHT, int x, int y){
 		this.setSize(WIDTH,HEIGHT);
 		this.setPosition(x,y);

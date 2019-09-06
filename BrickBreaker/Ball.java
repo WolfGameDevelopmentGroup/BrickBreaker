@@ -111,12 +111,15 @@ public class Ball extends BrickBreakerObject{
 
 		for(i=0;i<n;i++){
 			
-			if(this.bounds.intersects(brick.get(i).bounds)){
+			if(!(brick.get(i).itWasRemoved) && this.bounds.intersects(brick.get(i).bounds)){
 				this.speed += 0.1;
 				this.giveBallRandomColisionAngle();
 				if(this.dy <= 0)		
 					this.dy *= -1;
+
+				brick.get(i).itWasRemoved = true;
 			}
+	
 		}
 
 	}

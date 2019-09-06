@@ -88,7 +88,9 @@ public class Screen extends Canvas{
 		int n = brick.size();
 		int i;
 		for(i=0;i<n;i++){
-			this.g.fillRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height);
+			if(!(brick.get(i).itWasRemoved)){
+				this.g.fillRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height);
+			}
 		}
 	}
 
