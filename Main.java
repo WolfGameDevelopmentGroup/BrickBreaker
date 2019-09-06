@@ -20,7 +20,7 @@ public class Main{
 
 	public static void main(String[] args){
 
-		Game game = new Game();
+		Game game = new Game("BrickBreaker #1",200,200,2);
 		
 		game.startGame();
 	}
