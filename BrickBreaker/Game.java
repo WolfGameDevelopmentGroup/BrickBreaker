@@ -65,10 +65,20 @@ public class Game implements Runnable, KeyListener{
 		return this.frame;
 	}
 
+	private void restart(){
+		this.ball.setPosition(this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
+		this.ball.giveBallAnStartingAngle();
+		this.ball.speed = this.ball.v0;
+	}
+
 	public void updateGame(){
 		this.frame++;
-		this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH,this.brick);
-		this.player.update();
+		if(this.ball.y >= this.SCREEN_HEIGHT){
+			this.restart();
+		}else{
+			this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH,this.brick);
+			this.player.update();
+		}
 	}
 
 	public void renderizeGame(){
