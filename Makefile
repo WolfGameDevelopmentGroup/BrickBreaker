@@ -16,7 +16,7 @@
 # Licença: GPL-3.0 <https://www.gnu.org/licenses/gpl-3.0.txt>.
 
 CC = javac
-PAC = $(wildcard ./GamePong/*.java)
+PAC = $(wildcard ./BrickBreaker/*.java)
 DEP = $(PAC:.java=.class)
 MAIN = Main.java
 MAINCLASS = $(MAIN:.java=.class)
