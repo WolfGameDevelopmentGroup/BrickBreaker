@@ -50,7 +50,7 @@ public abstract class BrickBreakerObject{
 		return this.bounds = new Rectangle(this.x,this.y,this.width,this.height); 
 	}
 
-	public abstract void update();
+	public void update(){}
 
 }
 
