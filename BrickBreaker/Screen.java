@@ -82,12 +82,17 @@ public class Screen extends Canvas{
 		this.g.fillRect(ball.getBallXPosition(),ball.getBallYPosition(),ball.width, ball.height);
 	}
 
+	public void drawBrick(Bricks brick){
+		this.g.setColor(Color.white);
+		this.g.fillRect(brick.x,brick.y,brick.width, brick.height);
+	}
 
-	public void drawFrame(Player player, Ball ball){
+	public void drawFrame(Player player, Ball ball, Bricks brick){
 		this.g = this.layer.getGraphics();
 		this.drawBackground();
 		this.drawPlayer(player);
 		this.drawBall(ball);
+		this.drawBrick(brick);
 		this.g = this.bs.getDrawGraphics();
 		this.g.drawImage(this.layer, 0, 0, this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,null);
 		this.bs.show();
@@ -97,6 +102,5 @@ public class Screen extends Canvas{
 		this.bgColor = bgColor;
 		this.g.setColor(this.bgColor);
 	}
-
 
 }

@@ -23,10 +23,4 @@ public class Bricks extends BrickBreakerObject{
 		this.setPosition(x,y);
 	}
 
-	public void update(){
-
-		// Verificar colisão com a bola
-
-	}
-
 }

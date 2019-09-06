@@ -93,6 +93,11 @@ public class Ball extends BrickBreakerObject{
 			this.dx *= -1.0;
 		}else if(this.x <= 0){
 			this.dx *= -1.0;
+		}else if(this.y <= 0.1){
+			this.giveBallRandomColisionAngle();
+			if(this.dy <= 0){
+				this.dy *= -1.0;
+			}
 		}
 
 	}

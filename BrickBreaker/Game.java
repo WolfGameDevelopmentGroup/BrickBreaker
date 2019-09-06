@@ -18,9 +18,12 @@ package BrickBreaker;
 import BrickBreaker.Player;
 import BrickBreaker.Screen;
 import BrickBreaker.Ball;
+import BrickBreaker.Bricks;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Game implements Runnable{
+public class Game implements Runnable, KeyListener{
 
 	public boolean isRunning=false;
 	private int frame=0;
@@ -31,6 +34,7 @@ public class Game implements Runnable{
 	private Screen screen;
 	private Player player;
 	private Ball ball;
+	private Bricks brick;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -40,7 +44,9 @@ public class Game implements Runnable{
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		this.player = new Player(20,5,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT-5);
 		this.ball = new Ball(5,5,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
+		this.brick = new Bricks(10,10,this.SCREEN_WIDTH/2,0);
 		this.screen.setBackgroungColor(Color.BLACK);
+		this.screen.canvas.addKeyListener(this);
 	}
 
 	public int getActualFrameNumber(){
@@ -50,10 +56,11 @@ public class Game implements Runnable{
 	public void updateGame(){
 		this.frame++;
 		this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH);
+		this.player.update();
 	}
 
 	public void renderizeGame(){
-		this.screen.drawFrame(this.player,this.ball);
+		this.screen.drawFrame(this.player,this.ball,this.brick);
 	}
 
 	public synchronized void startGame(){
@@ -75,5 +82,23 @@ public class Game implements Runnable{
 		}
 
 	}
+
+	public void keyPressed(KeyEvent e){
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+			player.moveRight=true;
+		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			player.moveLeft=true;
+		}
+	}
+
+	public void keyReleased(KeyEvent e){
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+			player.moveRight=false;
+		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
+			player.moveLeft=false;
+		}
+	}
+
+	public void keyTyped(KeyEvent e){}
 
 }
