@@ -78,7 +78,7 @@ public class Game implements Runnable, KeyListener{
 			this.restart();
 		}else if(!(pausedGame)){
 			this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH,this.brick);
-			this.player.update();
+			this.player.update(this.SCREEN_WIDTH);
 		}
 	}
 

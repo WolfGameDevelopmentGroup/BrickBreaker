@@ -24,11 +24,16 @@ public class Player extends BrickBreakerObject{
 		this.setPosition(x,y);
 	}
 
-	public void update(){
-		if(this.moveLeft){
-			this.x -= this.speed;
-		}else if(this.moveRight){
-			this.x += this.speed;
+	public void update(int SCREEN_WIDTH){
+	
+		if(this.moveRight){
+			if(this.width+this.x+this.speed <= SCREEN_WIDTH){
+				this.x+=this.speed;
+			}
+		}else if(this.moveLeft){
+			if(this.x >= 0){
+				this.x-=this.speed;
+			}
 		}
 	}
 
