@@ -36,7 +36,7 @@ public class Bricks extends BrickBreakerObject{
 	public Color setBrickColor(int n){
 		switch(n){
 		case 0:
-			color = Color.WHITE;
+			color = Color.GREEN;
 		break;
 		case 1:
 			color = Color.BLUE;
@@ -50,8 +50,20 @@ public class Bricks extends BrickBreakerObject{
 		case 4:
 			color = Color.RED;
 		break;
+		case 5:
+			color = Color.MAGENTA;
+		break;
+		case 6:
+			color = Color.CYAN;
+		break;
+		case 7:
+			color = Color.YELLOW;
+		break;
+		case 8:
+			color = Color.GRAY;
+		break;
 		default:
-			color = Color.GREEN;
+			color = Color.WHITE;
 		break;
 		}
 
