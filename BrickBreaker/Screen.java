@@ -88,7 +88,7 @@ public class Screen extends Canvas{
 		int i;
 		for(i=0;i<n;i++){
 			if(!(brick.get(i).itWasRemoved)){
-				this.g.setColor(brick.get(i).color);
+				this.g.setColor(brick.get(i).getBrickColor());
 				this.g.fillRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height);
 			}
 		}

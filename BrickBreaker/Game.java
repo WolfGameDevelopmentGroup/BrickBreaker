@@ -59,11 +59,13 @@ public class Game implements Runnable, KeyListener{
 		int i;
 		int totalBricksPerRow = (int)(this.SCREEN_WIDTH)/(10);
 
-		for(row=0;row<2;row++){
+		for(row=0;row<3;row++){
 			for(positionInRow=0;positionInRow<totalBricksPerRow;positionInRow++){
 				i = positionInRow + row*(totalBricksPerRow);
+				int n = new Random().nextInt(5);
 				this.brick.add(new Bricks(10*this.SCALE,10*this.SCALE,(positionInRow*10*this.SCALE),(row*10*this.SCALE)));
 				this.brick.get(i).bounds = new Rectangle((int)(this.brick.get(i).x),(int)(this.brick.get(i).y),this.brick.get(i).width,this.brick.get(i).height);
+				this.brick.get(i).setBrickColor(n);
 			}
 		}
 	}

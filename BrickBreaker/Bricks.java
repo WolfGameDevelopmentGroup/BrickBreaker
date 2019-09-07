@@ -22,17 +22,18 @@ import java.util.Random;
 public class Bricks extends BrickBreakerObject{
 
 	public boolean itWasRemoved = false;
-	public Color color;
+	private Color color = Color.WHITE;
 
 	public Bricks(int WIDTH, int HEIGHT, int x, int y){
 		this.setSize(WIDTH,HEIGHT);
 		this.setPosition(x,y);
-		this.color = this.getARandomColor();
 	}
 
-	private Color getARandomColor(){
-		Color color = Color.GREEN;
-		int n = new Random().nextInt(5);
+	public Color getBrickColor(){
+		return this.color;
+	}
+
+	public Color setBrickColor(int n){
 		switch(n){
 		case 0:
 			color = Color.WHITE;
@@ -48,6 +49,9 @@ public class Bricks extends BrickBreakerObject{
 		break;
 		case 4:
 			color = Color.RED;
+		break;
+		default:
+			color = Color.GREEN;
 		break;
 		}
 
