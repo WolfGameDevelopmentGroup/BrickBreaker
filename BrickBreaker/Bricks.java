@@ -16,13 +16,42 @@
 
 package BrickBreaker;
 
+import java.awt.Color;
+import java.util.Random;
+
 public class Bricks extends BrickBreakerObject{
 
 	public boolean itWasRemoved = false;
+	public Color color;
 
 	public Bricks(int WIDTH, int HEIGHT, int x, int y){
 		this.setSize(WIDTH,HEIGHT);
 		this.setPosition(x,y);
+		this.color = this.getARandomColor();
+	}
+
+	private Color getARandomColor(){
+		Color color = Color.GREEN;
+		int n = new Random().nextInt(5);
+		switch(n){
+		case 0:
+			color = Color.WHITE;
+		break;
+		case 1:
+			color = Color.BLUE;
+		break;
+		case 2:
+			color = Color.ORANGE;
+		break;
+		case 3:
+			color = Color.PINK;
+		break;
+		case 4:
+			color = Color.RED;
+		break;
+		}
+
+		return color;
 	}
 
 }
