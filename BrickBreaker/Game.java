@@ -55,12 +55,17 @@ public class Game implements Runnable, KeyListener{
 	public void buildBricks(){
 		
 		int i;
+		int j;
+		int ind;
 
 		int totalBricks = (int)(this.SCREEN_WIDTH)/(10);
 
-		for(i=0;i<totalBricks;i++){
-			this.brick.add(new Bricks(10*this.SCALE,10*this.SCALE,(i*10*this.SCALE),0));
-			this.brick.get(i).bounds = new Rectangle((int)(this.brick.get(i).x),(int)(this.brick.get(i).y),this.brick.get(i).width,this.brick.get(i).height);
+		for(j=0;j<2;j++){
+			for(i=0;i<totalBricks;i++){
+				ind = i + j*(totalBricks);
+				this.brick.add(new Bricks(10*this.SCALE,10*this.SCALE,(i*10*this.SCALE),(j*10*this.SCALE)));
+				this.brick.get(ind).bounds = new Rectangle((int)(this.brick.get(ind).x),(int)(this.brick.get(ind).y),this.brick.get(ind).width,this.brick.get(ind).height);
+			}
 		}
 	}
 
