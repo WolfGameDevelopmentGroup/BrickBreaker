@@ -45,8 +45,8 @@ public class Game implements Runnable, KeyListener{
 		this.SCREEN_HEIGHT = HEIGHT;
 		this.SCALE = SCALE;
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
-		this.player = new Player(20,5,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT-5);
-		this.ball = new Ball(5,5,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
+		this.player = new Player(20*SCALE,5*SCALE,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT-5);
+		this.ball = new Ball(5*SCALE,5*SCALE,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
 		this.buildBricks();
 		this.screen.setBackgroungColor(Color.BLACK);
 		this.screen.canvas.addKeyListener(this);
@@ -56,8 +56,10 @@ public class Game implements Runnable, KeyListener{
 		
 		int i;
 
-		for(i=0;i<10;i++){
-			this.brick.add(new Bricks(10,10,(i*10),0));
+		int totalBricks = (int)(this.SCREEN_WIDTH)/(10);
+
+		for(i=0;i<totalBricks;i++){
+			this.brick.add(new Bricks(10*this.SCALE,10*this.SCALE,(i*10*this.SCALE),0));
 			this.brick.get(i).bounds = new Rectangle((int)(this.brick.get(i).x),(int)(this.brick.get(i).y),this.brick.get(i).width,this.brick.get(i).height);
 		}
 	}
