@@ -28,6 +28,7 @@ import java.awt.Rectangle;
 public class Game implements Runnable, KeyListener{
 
 	public boolean isRunning=false;
+	private boolean pausedGame = false;
 	private int frame=0;
 	private String TITLE;
 	private int SCREEN_WIDTH;
@@ -75,7 +76,7 @@ public class Game implements Runnable, KeyListener{
 		this.frame++;
 		if(this.ball.y >= this.SCREEN_HEIGHT){
 			this.restart();
-		}else{
+		}else if(!(pausedGame)){
 			this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH,this.brick);
 			this.player.update();
 		}
@@ -106,10 +107,16 @@ public class Game implements Runnable, KeyListener{
 	}
 
 	public void keyPressed(KeyEvent e){
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+		if(!(this.pausedGame) && e.getKeyCode() == KeyEvent.VK_RIGHT){
 			player.moveRight=true;
-		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
+		}else if(!(this.pausedGame) && e.getKeyCode()==KeyEvent.VK_LEFT){
 			player.moveLeft=true;
+		}else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+			if(!(this.pausedGame)){
+				this.pausedGame=true;
+			}else{
+				this.pausedGame=false;
+			}
 		}
 	}
 
