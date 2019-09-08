@@ -91,7 +91,7 @@ public class Game implements Runnable, KeyListener{
 			this.restart();
 			this.player.descPlayerLife();
 		}else if(!(pausedGame)){
-			this.ball.update(this.player,this.SCREEN_WIDTH,this.brick);
+			this.ball.update(this.player,this.screen,this.brick);
 			this.player.update(this.SCREEN_WIDTH);
 		}
 	}

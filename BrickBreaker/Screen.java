@@ -67,6 +67,14 @@ public class Screen extends Canvas{
 		this.canvas.requestFocus();
 	}
 
+	public int getScreenWidth(){
+		return this.WIDTH;
+	}
+
+	public int getScreenScale(){
+		return this.SCALE;
+	}
+
 	public void showScreen(){
 		this.jframe.setVisible(true);
 	}
