@@ -22,8 +22,7 @@ import java.util.*;
 
 public class Ball extends BrickBreakerObject{
 
-	public double v0=3;
-	private double speedIncrementAfterColision = 0.01;
+	public double v0=3.5;
 	private double dx;
 	private double dy;
 
@@ -72,8 +71,11 @@ public class Ball extends BrickBreakerObject{
 		this.verifyBallColisionWithWall(SCREEN_WIDTH);
 		this.verifyBallColisionWithPlayer(player.getBoundsRectangle());
 		this.verifyBallColisionWithBrick(brick,player);
-		this.x += this.dx * this.speed;
-		this.y += this.dy * this.speed;
+		double xAntes = this.x;
+		this.x += Math.round(this.dx * this.speed);
+		this.y += Math.round(this.dy * this.speed);
+		if(xAntes == this.x)
+			System.out.println(this.dy*this.speed+" "+this.dx*this.speed+" "+this.y+" "+this.x);
 	}
 
 	private void verifyBallColisionWithPlayer(Rectangle boundsPlayer){
@@ -81,7 +83,6 @@ public class Ball extends BrickBreakerObject{
 		this.bounds = new Rectangle((int)(this.x),(int)(this.y),this.width,this.height);
 
 		if(this.bounds.intersects(boundsPlayer)){
-			this.speed += this.speedIncrementAfterColision;
 			this.giveBallRandomColisionAngle();
 			if(dy > 0)		
 				this.dy *= -1;
@@ -94,10 +95,15 @@ public class Ball extends BrickBreakerObject{
 
 		if(this.x+this.width > SCREEN_WIDTH){
 			this.dx *= -1.0;
+			if(this.dy*this.speed <= 0){
+				this.dy -= 0.1;
+			}
 		}else if(this.x <= 0){
 			this.dx *= -1.0;
+			if(this.dy*this.speed <= 0){
+				this.dy += 0.1;
+			}
 		}else if(this.y <= 0.1){
-			this.giveBallRandomColisionAngle();
 			if(this.dy <= 0){
 				this.dy *= -1.0;
 			}
@@ -113,7 +119,6 @@ public class Ball extends BrickBreakerObject{
 		for(i=0;i<n;i++){
 			
 			if(!(brick.get(i).itWasRemoved) && this.bounds.intersects(brick.get(i).bounds)){
-				this.speed += this.speedIncrementAfterColision;
 				this.giveBallRandomColisionAngle();
 				if(this.dy <= 0)		
 					this.dy *= -1;
