@@ -86,9 +86,11 @@ public class Screen extends Canvas{
 	public void drawPlayerLife(Player player){
 		this.g.setColor(Color.white);
 		int x = (int)(this.SCALE*(this.WIDTH/2));
-		int y = (int)this.SCALE*(this.HEIGHT/2);
+		int y = (int)(this.SCALE*(this.HEIGHT/2)+50);
 		if(player.getPlayerLife() <= 0){
 			this.g.drawString("Game Over",x-40,y);
+			this.g.drawString("Press Key Down",x-50,y+40);
+			this.g.drawString("to start a new game",x-60,y+80);
 		}else{
 			this.g.drawString("Life: "+player.getPlayerLife(),x-20,y);
 		}

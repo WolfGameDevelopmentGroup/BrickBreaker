@@ -121,12 +121,24 @@ public class Game implements Runnable, KeyListener{
 
 	}
 
+	private void startNewGame(){
+		this.player.setPlayerLife(3);
+		this.pausedGame=false;
+		this.brick.clear();
+		this.buildBricks();
+	}
+
 	public void keyPressed(KeyEvent e){
 		if(!(this.pausedGame) && e.getKeyCode() == KeyEvent.VK_RIGHT){
 			player.moveRight=true;
 		}else if(!(this.pausedGame) && e.getKeyCode()==KeyEvent.VK_LEFT){
 			player.moveLeft=true;
 		}else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+			if(player.getPlayerLife() <= 0){
+				this.startNewGame();
+				return;
+			}
+
 			if(!(this.pausedGame)){
 				this.pausedGame=true;
 			}else{

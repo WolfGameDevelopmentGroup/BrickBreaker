@@ -18,7 +18,7 @@ package BrickBreaker;
 
 public class Player extends BrickBreakerObject{
 
-	private int life = 1;
+	private int life = 3;
 
 	public Player(int WIDTH, int HEIGHT, int x, int y){
 
@@ -28,6 +28,10 @@ public class Player extends BrickBreakerObject{
 
 	public int getPlayerLife(){
 		return this.life;
+	}
+
+	public void setPlayerLife(int n){
+		this.life = n;
 	}
 
 	public void descPlayerLife(){
