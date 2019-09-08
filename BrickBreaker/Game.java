@@ -83,8 +83,13 @@ public class Game implements Runnable, KeyListener{
 
 	public void updateGame(){
 		this.frame++;
+		if(player.getPlayerLife() <= 0){
+			this.pausedGame = true;
+			return;
+		}
 		if(this.ball.y >= this.SCREEN_HEIGHT){
 			this.restart();
+			this.player.descPlayerLife();
 		}else if(!(pausedGame)){
 			this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH,this.brick);
 			this.player.update(this.SCREEN_WIDTH);
@@ -92,6 +97,7 @@ public class Game implements Runnable, KeyListener{
 	}
 
 	public void renderizeGame(){
+
 		this.screen.drawFrame(this.player,this.ball,this.brick);
 	}
 

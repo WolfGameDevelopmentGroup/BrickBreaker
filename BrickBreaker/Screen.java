@@ -83,11 +83,15 @@ public class Screen extends Canvas{
 		this.g.fillRect(ball.getBallXPosition(),ball.getBallYPosition(),ball.width, ball.height);
 	}
 
-	public void drawPlayerLife(int playerLife){
+	public void drawPlayerLife(Player player){
 		this.g.setColor(Color.white);
-		int x = (int)this.SCALE*(this.WIDTH/2);
+		int x = (int)(this.SCALE*(this.WIDTH/2));
 		int y = (int)this.SCALE*(this.HEIGHT/2);
-		this.g.drawString(""+playerLife,x,y);
+		if(player.getPlayerLife() <= 0){
+			this.g.drawString("Game Over",x-40,y);
+		}else{
+			this.g.drawString("Life: "+player.getPlayerLife(),x-20,y);
+		}
 	}
 
 	public void drawBrick(ArrayList<Bricks> brick){
@@ -107,7 +111,7 @@ public class Screen extends Canvas{
 		this.drawPlayer(player);
 		this.drawBall(ball);
 		this.drawBrick(brick);
-		this.drawPlayerLife(3);//player.getPlayerLife());
+		this.drawPlayerLife(player);
 		this.g = this.bs.getDrawGraphics();
 		this.g.drawImage(this.layer, 0, 0, this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,null);
 		this.bs.show();

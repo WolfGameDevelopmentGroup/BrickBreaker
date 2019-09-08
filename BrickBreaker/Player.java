@@ -18,10 +18,20 @@ package BrickBreaker;
 
 public class Player extends BrickBreakerObject{
 
+	private int life = 1;
+
 	public Player(int WIDTH, int HEIGHT, int x, int y){
 
 		this.setSize(WIDTH,HEIGHT);
 		this.setPosition(x,y);
+	}
+
+	public int getPlayerLife(){
+		return this.life;
+	}
+
+	public void descPlayerLife(){
+		this.life--;
 	}
 
 	public void update(int SCREEN_WIDTH){
