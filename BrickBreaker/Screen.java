@@ -58,7 +58,7 @@ public class Screen extends Canvas{
 
 		this.canvas.createBufferStrategy(3);
 		this.bs = this.canvas.getBufferStrategy();
-		this.layer = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
+		this.layer = new BufferedImage(this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,BufferedImage.TYPE_INT_RGB);
 		this.g = this.layer.getGraphics();
 		this.g.setColor(this.bgColor);
 		this.showScreen();
@@ -83,6 +83,13 @@ public class Screen extends Canvas{
 		this.g.fillRect(ball.getBallXPosition(),ball.getBallYPosition(),ball.width, ball.height);
 	}
 
+	public void drawPlayerLife(int playerLife){
+		this.g.setColor(Color.white);
+		int x = (int)this.SCALE*(this.WIDTH/2);
+		int y = (int)this.SCALE*(this.HEIGHT/2);
+		this.g.drawString(""+playerLife,x,y);
+	}
+
 	public void drawBrick(ArrayList<Bricks> brick){
 		int n = brick.size();
 		int i;
@@ -100,6 +107,7 @@ public class Screen extends Canvas{
 		this.drawPlayer(player);
 		this.drawBall(ball);
 		this.drawBrick(brick);
+		this.drawPlayerLife(3);//player.getPlayerLife());
 		this.g = this.bs.getDrawGraphics();
 		this.g.drawImage(this.layer, 0, 0, this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,null);
 		this.bs.show();

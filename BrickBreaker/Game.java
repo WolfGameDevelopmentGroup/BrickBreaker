@@ -41,11 +41,11 @@ public class Game implements Runnable, KeyListener{
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
-		this.SCREEN_WIDTH = WIDTH;
-		this.SCREEN_HEIGHT = HEIGHT;
+		this.SCREEN_WIDTH = WIDTH*SCALE;
+		this.SCREEN_HEIGHT = HEIGHT*SCALE;
 		this.SCALE = SCALE;
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
-		this.player = new Player(20*SCALE,5*SCALE,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT-5);
+		this.player = new Player(30*SCALE,10*SCALE,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT-5);
 		this.ball = new Ball(5*SCALE,5*SCALE,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
 		this.buildBricks();
 		this.screen.setBackgroungColor(Color.BLACK);
@@ -54,18 +54,19 @@ public class Game implements Runnable, KeyListener{
 
 	public void buildBricks(){
 		
+		int brickWidth = 20*this.SCALE;
 		int positionInRow;
 		int row;
 		int i;
-		int totalBricksPerRow = (int)(this.SCREEN_WIDTH)/(10);
+		int totalBricksPerRow = (int)(this.SCREEN_WIDTH)/(brickWidth);
 
 		for(row=0;row<3;row++){
 			for(positionInRow=0;positionInRow<totalBricksPerRow;positionInRow++){
 				i = positionInRow + row*(totalBricksPerRow);
-				//int n = new Random().nextInt(5);
-				this.brick.add(new Bricks(10*this.SCALE,10*this.SCALE,(positionInRow*10*this.SCALE),(row*10*this.SCALE)));
+				int n = new Random().nextInt(5);
+				this.brick.add(new Bricks(brickWidth,brickWidth,(positionInRow*brickWidth),(row*brickWidth)));
 				this.brick.get(i).bounds = new Rectangle((int)(this.brick.get(i).x),(int)(this.brick.get(i).y),this.brick.get(i).width,this.brick.get(i).height);
-				this.brick.get(i).setBrickColor(positionInRow);
+				this.brick.get(i).setBrickColor(n);
 			}
 		}
 	}
