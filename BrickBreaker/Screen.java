@@ -24,6 +24,7 @@ import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.*;
+import java.awt.Font;
 
 public class Screen extends Canvas{
 
@@ -61,6 +62,7 @@ public class Screen extends Canvas{
 		this.layer = new BufferedImage(this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,BufferedImage.TYPE_INT_RGB);
 		this.g = this.layer.getGraphics();
 		this.g.setColor(this.bgColor);
+		this.g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		this.showScreen();
 		this.canvas.requestFocus();
 	}
@@ -94,9 +96,21 @@ public class Screen extends Canvas{
 			this.g.drawString("Game Over",x-40,y);
 			this.g.drawString("Press Key Down",x-50,y+40);
 			this.g.drawString("to start a new game",x-60,y+80);
+			this.g.setColor(Color.RED);
+			this.g.fill3DRect((this.WIDTH-30)*this.SCALE,10,30*this.SCALE,5*this.SCALE,false);
 		}else{
-			this.g.drawString("Life: "+player.getPlayerLife(),x-20,y);
+			this.g.setColor(Color.RED);
+			this.g.fill3DRect((this.WIDTH-30)*this.SCALE,10,30*this.SCALE,5*this.SCALE,false);
+			this.g.setColor(Color.GREEN);
+			this.g.fill3DRect((this.WIDTH-30)*this.SCALE,10,(10*player.getPlayerLife())*this.SCALE,5*this.SCALE,true);
+
 		}
+	}
+
+	private void drawPlayerScore(Player player){
+		this.g.setColor(Color.WHITE);
+		String str = "Score: "+player.score;
+		this.g.drawString(str,10,20);
 	}
 
 	public void drawBrick(ArrayList<Bricks> brick){
@@ -117,6 +131,7 @@ public class Screen extends Canvas{
 		this.drawBall(ball);
 		this.drawBrick(brick);
 		this.drawPlayerLife(player);
+		this.drawPlayerScore(player);
 		this.g = this.bs.getDrawGraphics();
 		this.g.drawImage(this.layer, 0, 0, this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,null);
 		this.bs.show();

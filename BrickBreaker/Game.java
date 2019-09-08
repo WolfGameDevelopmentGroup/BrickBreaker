@@ -64,7 +64,7 @@ public class Game implements Runnable, KeyListener{
 			for(positionInRow=0;positionInRow<totalBricksPerRow;positionInRow++){
 				i = positionInRow + row*(totalBricksPerRow);
 				int n = new Random().nextInt(5);
-				this.brick.add(new Bricks(brickWidth,brickWidth,(positionInRow*brickWidth),(row*brickWidth)));
+				this.brick.add(new Bricks(brickWidth,brickWidth,(positionInRow*brickWidth),(row*brickWidth)+brickWidth));
 				this.brick.get(i).bounds = new Rectangle((int)(this.brick.get(i).x),(int)(this.brick.get(i).y),this.brick.get(i).width,this.brick.get(i).height);
 				this.brick.get(i).setBrickColor(n);
 			}
@@ -91,7 +91,7 @@ public class Game implements Runnable, KeyListener{
 			this.restart();
 			this.player.descPlayerLife();
 		}else if(!(pausedGame)){
-			this.ball.update(this.player.getBoundsRectangle(),this.SCREEN_WIDTH,this.brick);
+			this.ball.update(this.player,this.SCREEN_WIDTH,this.brick);
 			this.player.update(this.SCREEN_WIDTH);
 		}
 	}
@@ -123,6 +123,7 @@ public class Game implements Runnable, KeyListener{
 
 	private void startNewGame(){
 		this.player.setPlayerLife(3);
+		this.player.score = 0;
 		this.pausedGame=false;
 		this.brick.clear();
 		this.buildBricks();

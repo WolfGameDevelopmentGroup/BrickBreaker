@@ -67,11 +67,11 @@ public class Ball extends BrickBreakerObject{
 			this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
 	}
 
-	public void update(Rectangle boundsPlayer, int SCREEN_WIDTH, ArrayList<Bricks> brick){
+	public void update(Player player, int SCREEN_WIDTH, ArrayList<Bricks> brick){
 
 		this.verifyBallColisionWithWall(SCREEN_WIDTH);
-		this.verifyBallColisionWithPlayer(boundsPlayer);
-		this.verifyBallColisionWithBrick(brick);
+		this.verifyBallColisionWithPlayer(player.getBoundsRectangle());
+		this.verifyBallColisionWithBrick(brick,player);
 		this.x += this.dx * this.speed;
 		this.y += this.dy * this.speed;
 	}
@@ -105,7 +105,7 @@ public class Ball extends BrickBreakerObject{
 
 	}
 
-	private void verifyBallColisionWithBrick(ArrayList<Bricks> brick){
+	private void verifyBallColisionWithBrick(ArrayList<Bricks> brick, Player player){
 
 		int n = brick.size();
 		int i;
@@ -119,6 +119,7 @@ public class Ball extends BrickBreakerObject{
 					this.dy *= -1;
 
 				brick.get(i).itWasRemoved = true;
+				player.score++;
 			}
 	
 		}
