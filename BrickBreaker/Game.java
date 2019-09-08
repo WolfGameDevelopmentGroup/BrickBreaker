@@ -24,6 +24,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.*;
 import java.awt.Rectangle;
+import BrickBreaker.Sound;
 
 public class Game implements Runnable, KeyListener{
 
@@ -79,6 +80,7 @@ public class Game implements Runnable, KeyListener{
 		this.ball.setPosition(this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
 		this.ball.giveBallAnStartingAngle();
 		this.ball.speed = this.ball.v0;
+		Sound.playerLoseAPoint.play();
 	}
 
 	public void updateGame(){

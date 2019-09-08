@@ -71,10 +71,9 @@ public class Ball extends BrickBreakerObject{
 		this.verifyBallColisionWithWall(screen.getScreenWidth()*screen.getScreenScale());
 		this.verifyBallColisionWithPlayer(player,screen.getScreenScale());
 		this.verifyBallColisionWithBrick(brick,player);
-		double xAntes = this.x;
 		this.x += Math.round(this.dx * this.speed);
 		this.y += Math.round(this.dy * this.speed);
-		if(xAntes == this.x)
+		if(this.y == 0)
 			System.out.println(this.dy*this.speed+" "+this.dx*this.speed+" "+this.y+" "+this.x);
 	}
 
@@ -89,6 +88,7 @@ public class Ball extends BrickBreakerObject{
 			}else{
 				this.dy *= -1;
 			}
+			Sound.ballColision.play();
 		}
 
 
@@ -120,6 +120,7 @@ public class Ball extends BrickBreakerObject{
 
 				brick.get(i).itWasRemoved = true;
 				player.score++;
+				Sound.brickBreak.play();
 			}
 	
 		}
