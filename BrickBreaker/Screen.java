@@ -76,11 +76,14 @@ public class Screen extends Canvas{
 
 	public void drawPlayer(Player player){
 		this.g.setColor(Color.white);
-		this.g.fillRect(player.x,player.y,player.width, player.height);
+		this.g.fill3DRect(player.x,player.y,player.width, player.height,true);
+		this.g.setColor(Color.RED);
+		this.g.fill3DRect(player.x,player.y,5*this.SCALE,player.height,true);
+		this.g.fill3DRect(player.x+player.width-(5*this.SCALE),player.y,5*this.SCALE,player.height,true);
 	}
 	public void drawBall(Ball ball){
 		this.g.setColor(Color.white);
-		this.g.fillRect(ball.getBallXPosition(),ball.getBallYPosition(),ball.width, ball.height);
+		this.g.fillOval(ball.getBallXPosition(),ball.getBallYPosition(),ball.width, ball.height);
 	}
 
 	public void drawPlayerLife(Player player){
@@ -102,7 +105,7 @@ public class Screen extends Canvas{
 		for(i=0;i<n;i++){
 			if(!(brick.get(i).itWasRemoved)){
 				this.g.setColor(brick.get(i).getBrickColor());
-				this.g.fillRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height);
+				this.g.fill3DRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height,true);
 			}
 		}
 	}

@@ -22,7 +22,8 @@ import java.util.*;
 
 public class Ball extends BrickBreakerObject{
 
-	public double v0=2;
+	public double v0=3;
+	private double speedIncrementAfterColision = 0.01;
 	private double dx;
 	private double dy;
 
@@ -80,7 +81,7 @@ public class Ball extends BrickBreakerObject{
 		this.bounds = new Rectangle((int)(this.x),(int)(this.y),this.width,this.height);
 
 		if(this.bounds.intersects(boundsPlayer)){
-			this.speed += 0.1;
+			this.speed += this.speedIncrementAfterColision;
 			this.giveBallRandomColisionAngle();
 			if(dy > 0)		
 				this.dy *= -1;
@@ -112,7 +113,7 @@ public class Ball extends BrickBreakerObject{
 		for(i=0;i<n;i++){
 			
 			if(!(brick.get(i).itWasRemoved) && this.bounds.intersects(brick.get(i).bounds)){
-				this.speed += 0.1;
+				this.speed += this.speedIncrementAfterColision;
 				this.giveBallRandomColisionAngle();
 				if(this.dy <= 0)		
 					this.dy *= -1;
