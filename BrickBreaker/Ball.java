@@ -83,7 +83,7 @@ public class Ball extends BrickBreakerObject{
 		this.bounds = new Rectangle((int)(this.x),(int)(this.y),this.width,this.height);
 
 		if(this.bounds.intersects(player.getBoundsRectangle())){
-			if(this.x >= player.x+player.width-(5*SCALE) || this.x <= player.x+(5*SCALE)){
+			if(this.x >= player.x+player.width-(6*SCALE) || this.x <= player.x+(6*SCALE)){
 				this.dx *= -1;
 				this.dy *= -1;
 			}else{
@@ -98,18 +98,10 @@ public class Ball extends BrickBreakerObject{
 
 		if(this.x+this.width > SCREEN_WIDTH){
 			this.dx *= -1.0;
-			if(this.dy*this.speed <= 0){
-				this.dy -= 0.1;
-			}
 		}else if(this.x <= 0){
 			this.dx *= -1.0;
-			if(this.dy*this.speed <= 0){
-				this.dy += 0.1;
-			}
 		}else if(this.y <= 0.1){
-			if(this.dy <= 0){
-				this.dy *= -1.0;
-			}
+			this.dy *= -1.0;
 		}
 
 	}
