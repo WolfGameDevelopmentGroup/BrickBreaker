@@ -69,7 +69,7 @@ public class Ball extends BrickBreakerObject{
 	public void update(Player player, int SCREEN_WIDTH, ArrayList<Bricks> brick){
 
 		this.verifyBallColisionWithWall(SCREEN_WIDTH);
-		this.verifyBallColisionWithPlayer(player.getBoundsRectangle());
+		this.verifyBallColisionWithPlayer(player);
 		this.verifyBallColisionWithBrick(brick,player);
 		double xAntes = this.x;
 		this.x += Math.round(this.dx * this.speed);
@@ -78,14 +78,15 @@ public class Ball extends BrickBreakerObject{
 			System.out.println(this.dy*this.speed+" "+this.dx*this.speed+" "+this.y+" "+this.x);
 	}
 
-	private void verifyBallColisionWithPlayer(Rectangle boundsPlayer){
+	private void verifyBallColisionWithPlayer(Player player){
 
 		this.bounds = new Rectangle((int)(this.x),(int)(this.y),this.width,this.height);
 
-		if(this.bounds.intersects(boundsPlayer)){
-			this.giveBallRandomColisionAngle();
-			if(dy > 0)		
-				this.dy *= -1;
+		if(this.bounds.intersects(player.getBoundsRectangle())){
+			//this.giveBallRandomColisionAngle();
+			//if(dy > 0)		
+			//	this.dy *= -1;
+			this.dy *= -1;
 		}
 
 
