@@ -39,7 +39,7 @@ public class Game implements Runnable, KeyListener{
 	private Player player;
 	private Ball ball;
 	private ArrayList<Bricks> brick = new ArrayList<Bricks>();
-	private int levelNum = 2;
+	private int levelNum = 0;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
