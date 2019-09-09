@@ -48,7 +48,7 @@ public class Game implements Runnable, KeyListener{
 		this.SCALE = SCALE;
 		this.screen = new Screen(TITLE, WIDTH, HEIGHT, SCALE);
 		this.player = new Player(30*SCALE,10*SCALE,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT-5);
-		this.ball = new Ball(5*SCALE,5*SCALE,this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
+		this.ball = new Ball(5*SCALE,5*SCALE,this.player.x+this.player.width/2,this.player.y-this.player.height);
 		this.buildBricks();
 		this.screen.setBackgroungColor(Color.BLACK);
 		this.screen.canvas.addKeyListener(this);
@@ -78,7 +78,7 @@ public class Game implements Runnable, KeyListener{
 	}
 
 	private void restart(){
-		this.ball.setPosition(this.SCREEN_WIDTH/2,this.SCREEN_HEIGHT/2);
+		this.ball.setPosition(this.player.x+this.player.width/2,this.player.y-this.player.height/2);
 		this.ball.giveBallAnStartingAngle();
 		this.ball.speed = this.ball.v0;
 		Sound.playerLoseAPoint.play();
