@@ -25,6 +25,7 @@ public class Ball extends BrickBreakerObject{
 	public double v0=3.5;
 	private double dx;
 	private double dy;
+	private int hitWall=0;
 
 	public Ball(int WIDTH, int HEIGHT, int x, int y){
 
@@ -73,6 +74,11 @@ public class Ball extends BrickBreakerObject{
 		this.verifyBallColisionWithBrick(brick,player);
 		this.x += Math.round(this.dx * this.speed);
 		this.y += Math.round(this.dy * this.speed);
+		if(this.hitWall >= 2){
+				this.hitWall = 0;
+				this.update();
+				this.verifyBallColisionWithWall(screen.getScreenWidth()*screen.getScreenScale());
+		}
 	}
 
 	private void verifyBallColisionWithPlayer(Player player, int SCALE){
@@ -89,6 +95,9 @@ public class Ball extends BrickBreakerObject{
 				this.dy *= -1;
 			}
 			Sound.ballColision.play();
+
+			if(this.hitWall > 0)
+				this.hitWall--;
 		}
 
 
@@ -98,14 +107,10 @@ public class Ball extends BrickBreakerObject{
 
 		if(this.x+this.width > SCREEN_WIDTH){
 			this.dx *= -1.0;
-			if(this.dy == 0){
-				this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
-			}
+			this.hitWall++;
 		}else if(this.x <= 0){
 			this.dx *= -1.0;
-			if(this.dy == 0){
-				this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
-			}
+			this.hitWall++;
 		}else if(this.y <= 0.1){
 			this.dy *= -1.0;
 		}
@@ -121,8 +126,11 @@ public class Ball extends BrickBreakerObject{
 			
 			if(!(brick.get(i).itWasRemoved) && this.bounds.intersects(brick.get(i).bounds)){
 				this.giveBallRandomColisionAngle();
-				if(this.dy <= 0)		
+				if(this.dy < 0)		
 					this.dy *= -1;
+				if(this.y == 0){
+					this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
+				}
 
 				brick.get(i).itWasRemoved = true;
 				player.score++;

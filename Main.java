@@ -21,7 +21,7 @@ public class Main{
 	public static void main(String[] args){
 
 		String TITLE = "BrickBreaker #1";
-		int WIDTH = 200;
+		int WIDTH = 250;
 		int HEIGHT = 200;
 		int SCALE = 2;
 

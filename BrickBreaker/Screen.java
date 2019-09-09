@@ -66,9 +66,9 @@ public class Screen extends Canvas{
 		this.layer = new BufferedImage(this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,BufferedImage.TYPE_INT_RGB);
 		this.g = this.layer.getGraphics();
 		this.g2 = this.layer.getGraphics();
-		this.g2.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+		this.g2.setFont(new Font("TimesRoman", Font.PLAIN, 50));
 		this.g.setColor(this.bgColor);
-		this.g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		this.g.setFont(new Font("TimesRoman", Font.PLAIN, 40));
 		this.showScreen();
 		this.canvas.requestFocus();
 		this.level = new Level();
@@ -144,15 +144,16 @@ public class Screen extends Canvas{
 		this.g.setColor(Color.white);
 		int x = (int)(this.SCALE*(this.WIDTH/2));
 		int y = (int)(this.SCALE*(this.HEIGHT/2)+50);
-		this.g2.drawString("Brick Breaker",50,y-150);
-		this.g.drawString("Press Key Down to pause/start a new game",50,y+40);
-		this.g.drawString("Press Key Left to move Left",50,y+60);
-		this.g.drawString("Press Key Right to move Right",50,y+80);
+		int align = 80;
+		this.g2.drawString("Brick Breaker",align,y-150);
+		this.g.drawString("Press Key Down to pause/start a new game",align,y+40);
+		this.g.drawString("Press Key Left to move Left",align,y+60);
+		this.g.drawString("Press Key Right to move Right",align,y+80);
 		this.g.fillOval(player.x+player.width/2,player.y-player.height/2,5*this.SCALE,5*this.SCALE);
 		this.g.setColor(Color.RED);
-		this.drawBOnScreen(140,true);
+		this.drawBOnScreen(align+130,true);
 		this.g.setColor(Color.BLUE);
-		this.drawBOnScreen(160,false);
+		this.drawBOnScreen(align+150,false);
 		this.drawPlayer(player);
 	}
 
