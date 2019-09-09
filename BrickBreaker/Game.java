@@ -127,6 +127,7 @@ public class Game implements Runnable, KeyListener{
 	}
 
 	private void startNewGame(){
+		this.levelNum = 0;
 		this.player.setPlayerLife(3);
 		this.player.score = 0;
 		this.pausedGame=false;

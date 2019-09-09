@@ -38,6 +38,8 @@ public class Screen extends Canvas{
 	private BufferedImage layer;
 	private Color bgColor = Color.WHITE;
 	private Graphics g;
+	private Graphics g2;
+	private Font font1;
 
 	public Screen(String jframeTitle, int WIDTH, int HEIGHT, int SCALE){
 		this.WIDTH = WIDTH;
@@ -61,6 +63,8 @@ public class Screen extends Canvas{
 		this.bs = this.canvas.getBufferStrategy();
 		this.layer = new BufferedImage(this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,BufferedImage.TYPE_INT_RGB);
 		this.g = this.layer.getGraphics();
+		this.g2 = this.layer.getGraphics();
+		this.g2.setFont(new Font("TimesRoman", Font.PLAIN, 40));
 		this.g.setColor(this.bgColor);
 		this.g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		this.showScreen();
@@ -101,9 +105,7 @@ public class Screen extends Canvas{
 		int x = (int)(this.SCALE*(this.WIDTH/2));
 		int y = (int)(this.SCALE*(this.HEIGHT/2)+50);
 		if(player.getPlayerLife() <= 0){
-			this.g.drawString("Game Over",x-40,y);
-			this.g.drawString("Press Key Down",x-50,y+40);
-			this.g.drawString("to start a new game",x-60,y+80);
+			this.g2.drawString("Game Over",100,y);
 			this.g.setColor(Color.RED);
 			this.g.fill3DRect((this.WIDTH-30)*this.SCALE,10,30*this.SCALE,5*this.SCALE,false);
 		}else{
@@ -127,18 +129,39 @@ public class Screen extends Canvas{
 		for(i=0;i<n;i++){
 			if(!(brick.get(i).itWasRemoved)){
 				this.g.setColor(brick.get(i).getBrickColor());
-				this.g.fill3DRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height,true);
+			this.g.fill3DRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height,true);
 			}
 		}
 	}
 
-	private void drawInitialFrame(){
+	private void drawBOnScreen(int position, boolean style){
+		int i;
+		int width = 10 * this.SCALE;		
+		for(i=0;i<5;i++){
+			this.g.fill3DRect(position,150+(i*width),width,width,style);
+		}
+
+		this.g.fill3DRect(position+width,150,width,width,style);
+		this.g.fill3DRect(position+2*width,150+width,width,width,style);
+		this.g.fill3DRect(position+width,150+2*width,width,width,style);
+		this.g.fill3DRect(position+2*width,150+3*width,width,width,style);
+		this.g.fill3DRect(position+width,150+4*width,width,width,style);
+	}
+
+	private void drawInitialFrame(Player player){
 		this.g.setColor(Color.white);
 		int x = (int)(this.SCALE*(this.WIDTH/2));
 		int y = (int)(this.SCALE*(this.HEIGHT/2)+50);
-		this.g.drawString("Brick Breaker",x-40,y);
-		this.g.drawString("Press Key Down",x-50,y+40);
-		this.g.drawString("to start a new game",x-60,y+80);
+		this.g2.drawString("Brick Breaker",50,y-150);
+		this.g.drawString("Press Key Down to pause/start a new game",50,y+40);
+		this.g.drawString("Press Key Left to move Left",50,y+60);
+		this.g.drawString("Press Key Right to move Right",50,y+80);
+		this.g.fillOval(player.x+player.width/2,player.y-player.height/2,5*this.SCALE,5*this.SCALE);
+		this.g.setColor(Color.RED);
+		this.drawBOnScreen(140,true);
+		this.g.setColor(Color.BLUE);
+		this.drawBOnScreen(160,false);
+		this.drawPlayer(player);
 	}
 
 	public void drawFrame(Player player, Ball ball, ArrayList<Bricks> brick,int levelNum,boolean pausedGame){
@@ -153,11 +176,15 @@ public class Screen extends Canvas{
 			this.drawPlayerLife(player);
 			this.drawPlayerScore(player);
 			if(pausedGame){
-				this.g.drawString("Paused Game",x-40,y+40);
-				this.g.drawString("Press Key Down to start",x-70,y+55);
+				if(!(player.getPlayerLife() <= 0)){
+					this.g.drawString("Paused Game",x-40,y+40);
+					this.g.drawString("Press Key Down to start",x-70,y+55);
+				}else{
+					this.g.drawString("Press Key Down to restart",x-70,y+55);
+				}
 			}
 		}else{
-			this.drawInitialFrame();
+			this.drawInitialFrame(player);
 		}
 		this.g = this.bs.getDrawGraphics();
 		this.g.drawImage(this.layer, 0, 0, this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,null);
