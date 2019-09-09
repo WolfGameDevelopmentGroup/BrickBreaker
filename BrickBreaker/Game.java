@@ -39,7 +39,7 @@ public class Game implements Runnable, KeyListener{
 	private Player player;
 	private Ball ball;
 	private ArrayList<Bricks> brick = new ArrayList<Bricks>();
-	private int levelNum = 0;
+	private int levelNum = 2;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -99,6 +99,7 @@ public class Game implements Runnable, KeyListener{
 			this.brick.clear();
 			this.buildBricks();
 			this.pausedGame = true;
+			this.ball.setPosition(this.player.x+this.player.width/2,this.player.y-this.player.height/2);
 		}
 
 		if(this.ball.y >= this.SCREEN_HEIGHT){

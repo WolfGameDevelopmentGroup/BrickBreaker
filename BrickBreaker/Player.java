@@ -19,7 +19,7 @@ package BrickBreaker;
 public class Player extends BrickBreakerObject{
 
 	private int life = 3;
-	public int score = 0;
+	public int score = 24;
 
 	public Player(int WIDTH, int HEIGHT, int x, int y){
 
