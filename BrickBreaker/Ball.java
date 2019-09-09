@@ -79,6 +79,8 @@ public class Ball extends BrickBreakerObject{
 
 		this.bounds = new Rectangle((int)(this.x),(int)(this.y),this.width,this.height);
 
+		int playerCenter = (int)(player.x+player.width)/2;
+
 		if(this.bounds.intersects(player.getBoundsRectangle())){
 			if(this.x >= player.x+player.width-(6*SCALE) || this.x <= player.x+(6*SCALE)){
 				this.dx *= -1;
