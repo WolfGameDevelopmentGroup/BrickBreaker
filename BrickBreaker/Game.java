@@ -39,6 +39,7 @@ public class Game implements Runnable, KeyListener{
 	private Player player;
 	private Ball ball;
 	private ArrayList<Bricks> brick = new ArrayList<Bricks>();
+	private int levelNum = 0;
 
 	public Game(String TITLE, int WIDTH, int HEIGHT, int SCALE){
 		this.TITLE = TITLE;
@@ -88,6 +89,8 @@ public class Game implements Runnable, KeyListener{
 		if(player.getPlayerLife() <= 0){
 			this.pausedGame = true;
 			return;
+		}else if(levelNum == 0){
+			return;
 		}
 		if(this.ball.y >= this.SCREEN_HEIGHT){
 			this.restart();
@@ -100,7 +103,7 @@ public class Game implements Runnable, KeyListener{
 
 	public void renderizeGame(){
 
-		this.screen.drawFrame(this.player,this.ball,this.brick);
+		this.screen.drawFrame(this.player,this.ball,this.brick,this.levelNum);
 	}
 
 	public synchronized void startGame(){
@@ -140,6 +143,9 @@ public class Game implements Runnable, KeyListener{
 			if(player.getPlayerLife() <= 0){
 				this.startNewGame();
 				return;
+			}else if(levelNum == 0){
+				this.levelNum++;
+				this.pausedGame = false;
 			}
 
 			if(!(this.pausedGame)){

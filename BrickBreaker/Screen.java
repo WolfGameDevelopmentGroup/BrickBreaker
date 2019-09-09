@@ -132,14 +132,27 @@ public class Screen extends Canvas{
 		}
 	}
 
-	public void drawFrame(Player player, Ball ball, ArrayList<Bricks> brick){
+	private void drawInitialFrame(){
+		this.g.setColor(Color.white);
+		int x = (int)(this.SCALE*(this.WIDTH/2));
+		int y = (int)(this.SCALE*(this.HEIGHT/2)+50);
+		this.g.drawString("Brick Breaker",x-40,y);
+		this.g.drawString("Press Key Down",x-50,y+40);
+		this.g.drawString("to start a new game",x-60,y+80);
+	}
+
+	public void drawFrame(Player player, Ball ball, ArrayList<Bricks> brick,int levelNum){
 		this.g = this.layer.getGraphics();
 		this.drawBackground();
-		this.drawPlayer(player);
-		this.drawBall(ball);
-		this.drawBrick(brick);
-		this.drawPlayerLife(player);
-		this.drawPlayerScore(player);
+		if(!(levelNum==0)){
+			this.drawPlayer(player);
+			this.drawBall(ball);
+			this.drawBrick(brick);
+			this.drawPlayerLife(player);
+			this.drawPlayerScore(player);
+		}else{
+			this.drawInitialFrame();
+		}
 		this.g = this.bs.getDrawGraphics();
 		this.g.drawImage(this.layer, 0, 0, this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE,null);
 		this.bs.show();
