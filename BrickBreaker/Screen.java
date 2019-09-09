@@ -141,7 +141,9 @@ public class Screen extends Canvas{
 		this.g.drawString("to start a new game",x-60,y+80);
 	}
 
-	public void drawFrame(Player player, Ball ball, ArrayList<Bricks> brick,int levelNum){
+	public void drawFrame(Player player, Ball ball, ArrayList<Bricks> brick,int levelNum,boolean pausedGame){
+		int x = (int)(this.SCALE*(this.WIDTH/2));
+		int y = (int)(this.SCALE*(this.HEIGHT/2)+50);		
 		this.g = this.layer.getGraphics();
 		this.drawBackground();
 		if(!(levelNum==0)){
@@ -150,6 +152,10 @@ public class Screen extends Canvas{
 			this.drawBrick(brick);
 			this.drawPlayerLife(player);
 			this.drawPlayerScore(player);
+			if(pausedGame){
+				this.g.drawString("Paused Game",x-40,y+40);
+				this.g.drawString("Press Key Down to start",x-70,y+55);
+			}
 		}else{
 			this.drawInitialFrame();
 		}

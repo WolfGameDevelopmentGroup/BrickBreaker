@@ -103,7 +103,7 @@ public class Game implements Runnable, KeyListener{
 
 	public void renderizeGame(){
 
-		this.screen.drawFrame(this.player,this.ball,this.brick,this.levelNum);
+		this.screen.drawFrame(this.player,this.ball,this.brick,this.levelNum,this.pausedGame);
 	}
 
 	public synchronized void startGame(){
