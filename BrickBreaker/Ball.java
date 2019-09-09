@@ -73,8 +73,6 @@ public class Ball extends BrickBreakerObject{
 		this.verifyBallColisionWithBrick(brick,player);
 		this.x += Math.round(this.dx * this.speed);
 		this.y += Math.round(this.dy * this.speed);
-		if(this.y == 0)
-			System.out.println(this.dy*this.speed+" "+this.dx*this.speed+" "+this.y+" "+this.x);
 	}
 
 	private void verifyBallColisionWithPlayer(Player player, int SCALE){
@@ -98,8 +96,14 @@ public class Ball extends BrickBreakerObject{
 
 		if(this.x+this.width > SCREEN_WIDTH){
 			this.dx *= -1.0;
+			if(this.dy == 0){
+				this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
+			}
 		}else if(this.x <= 0){
 			this.dx *= -1.0;
+			if(this.dy == 0){
+				this.dy = Math.sin(Math.toRadians(new Random().nextInt(80)));
+			}
 		}else if(this.y <= 0.1){
 			this.dy *= -1.0;
 		}
