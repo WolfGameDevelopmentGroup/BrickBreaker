@@ -25,6 +25,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import java.awt.Font;
+import BrickBreaker.Level;
 
 public class Screen extends Canvas{
 
@@ -40,6 +41,7 @@ public class Screen extends Canvas{
 	private Graphics g;
 	private Graphics g2;
 	private Font font1;
+	private Level level;
 
 	public Screen(String jframeTitle, int WIDTH, int HEIGHT, int SCALE){
 		this.WIDTH = WIDTH;
@@ -69,6 +71,7 @@ public class Screen extends Canvas{
 		this.g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		this.showScreen();
 		this.canvas.requestFocus();
+		this.level = new Level();
 	}
 
 	public int getScreenWidth(){
@@ -123,17 +126,6 @@ public class Screen extends Canvas{
 		this.g.drawString(str,10,20);
 	}
 
-	public void drawBrick(ArrayList<Bricks> brick){
-		int n = brick.size();
-		int i;
-		for(i=0;i<n;i++){
-			if(!(brick.get(i).itWasRemoved)){
-				this.g.setColor(brick.get(i).getBrickColor());
-			this.g.fill3DRect(brick.get(i).x,brick.get(i).y,brick.get(i).width,brick.get(i).height,true);
-			}
-		}
-	}
-
 	private void drawBOnScreen(int position, boolean style){
 		int i;
 		int width = 10 * this.SCALE;		
@@ -172,7 +164,7 @@ public class Screen extends Canvas{
 		if(!(levelNum==0)){
 			this.drawPlayer(player);
 			this.drawBall(ball);
-			this.drawBrick(brick);
+			this.level.drawBricksAcordingToLevel(brick,this.g,levelNum);
 			this.drawPlayerLife(player);
 			this.drawPlayerScore(player);
 			if(pausedGame){

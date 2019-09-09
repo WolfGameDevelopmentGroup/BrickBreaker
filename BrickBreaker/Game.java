@@ -91,7 +91,10 @@ public class Game implements Runnable, KeyListener{
 			return;
 		}else if(levelNum == 0){
 			return;
+		}else if(this.player.score == this.levelNum*this.brick.size()){
+			this.levelNum = (int)this.player.score/this.brick.size();
 		}
+
 		if(this.ball.y >= this.SCREEN_HEIGHT){
 			this.restart();
 			this.player.descPlayerLife();
